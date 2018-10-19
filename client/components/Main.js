@@ -1,7 +1,19 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-export default class Main extends React.Component {
-  render() {
-    return <h1>Hello World</h1>;
-  }
-}
+const Main = () => {
+  return (
+    <Router>
+      <div id="container">
+        <div className="main--content">
+          {/*Nav goes here*/}
+          <div className="spacer" />
+          {/*Content goes here*/}
+        </div>
+        {/*Footer goes here*/}
+      </div>
+    </Router>
+  );
+};
+
+export default Main;

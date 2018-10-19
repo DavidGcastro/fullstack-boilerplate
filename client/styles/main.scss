@@ -1,4 +1,3 @@
-// @import './partials/_nav';
-// * {
-//     font-family: $main-font;
-//   }
+@import './variables/screenSizes.scss';
+@import './mixins/responsive.scss';
+@import './partials/globals';
