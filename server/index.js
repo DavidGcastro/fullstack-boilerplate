@@ -5,7 +5,9 @@ const app = express();
 const volleyball = require('volleyball');
 const bodyParser = require('body-parser');
 const path = require('path');
-var session = require('express-session');
+const session = require('express-session');
+const SessionStore = require('connect-session-sequelize')(session.Store);
+const passport = require('passport');
 const seed = require('./db/seed');
 //logging middleware
 app.use(volleyball);
@@ -32,6 +34,9 @@ app.use(
     //parallel requests without a session.
     //The default value is true, but using the default has been deprecated, as the default will change in the future.
     //Please research into this setting and choose what is appropriate to your use -case.
+    store: new SessionStore({
+      db
+    }),
     saveUninitialized: true
   })
 );
