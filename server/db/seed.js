@@ -1,53 +1,102 @@
-// const user = require('./models').user;
-// const tool = require('./models').tool;
 // const faker = require('faker');
-// const db = require('./models/index').db;
+// const {
+//   db,
+//   User,
+//   Project,
+//   Board,
+//   SubTask,
+//   SwimLane,
+//   Team
+// } = require('./models/index');
 // const Promise = db.Promise; // gives us Promise.map
-// const typeOfTool = [
-//   'general',
-//   'carpentry',
-//   'wood work',
-//   'metal work',
-//   'farm work'
-// ];
-// function getRandomInt(min, max) {
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
+
 // async function seed() {
 //   await db.sync({ force: true });
-//   const users = await seedUsers();
-//   const tools = await seedTools();
-//   console.log('Seeded', users.length, 'Users.');
-//   console.log('Seeded', tools.length, 'Tools.');
+//   await seedTeam();
+//   await seedBoards();
+//   await seedSwimLane();
+//   await seedSubTask();
+//   console.log('DB Seeded!');
+// }
+
+// function random(max) {
+//   let num = Math.floor(Math.random() * max);
+//   return num;
+// }
+
+// function seedTeam() {
+//   Promise.all([seedUsers(), seedProjects()]).then(([user, project]) =>
+//     Promise.all(
+//       new Array(user.length).fill(1).map((current, i) =>
+//         Team.create({
+//           userId: user[i].id,
+
+//           projectId: project[random(15)].id
+//         })
+//       )
+//     ).catch(err => console.log(err))
+//   );
+// }
+
+// function seedProjects() {
+//   return Promise.all(
+//     new Array(30).fill(1).map(() =>
+//       Project.create({
+//         name: faker.lorem.word() + ' Project'
+//       })
+//     )
+//   );
 // }
 
 // function seedUsers() {
 //   return Promise.all(
-//     new Array(20).fill(1).map(() =>
-//       user.create({
+//     new Array(100).fill(1).map(() =>
+//       User.create({
 //         firstName: faker.name.firstName(),
 //         lastName: faker.name.lastName(),
-//         email: faker.internet.email()
+//         email: faker.internet.exampleEmail(),
+//         password: 'password'
 //       })
 //     )
 //   );
 // }
 
-// function seedTools() {
+// function seedBoards() {
 //   return Promise.all(
-//     new Array(30).fill(1).map(() =>
-//       tool.create({
-//         name: faker.commerce.productName(),
-//         description: faker.lorem.paragraph(),
-//         price: faker.commerce.price(),
-//         category: typeOfTool[getRandomInt(0, typeOfTool.length)],
-//         borrowed: faker.random.boolean(),
-//         dueDate: faker.date.future(),
-//         userId: getRandomInt(0, 20)
+//     new Array(60).fill(1).map(() =>
+//       Board.create({
+//         name: faker.lorem.word() + ' Board',
+//         description: faker.lorem.sentence(),
+//         projectId: Math.floor(Math.random() * 30 + 1)
 //       })
 //     )
 //   );
 // }
-// seed()
-//   .then(() => process.exit())
-//   .catch(error => console.log(error));
+
+// function seedSwimLane() {
+//   return Promise.all(
+//     new Array(60).fill(1).map(() =>
+//       SwimLane.create({
+//         name: faker.lorem.word() + ' Lane',
+//         description: faker.lorem.sentence(),
+//         boardId: Math.floor(Math.random() * 60 + 1)
+//       })
+//     )
+//   );
+// }
+// function seedSubTask() {
+//   return Promise.all(
+//     new Array(100).fill(1).map(() =>
+//       SubTask.create({
+//         title: faker.lorem.word() + ' Task',
+//         points: 1,
+//         label: 'Front End',
+//         description: faker.lorem.sentence(),
+//         userId: Math.floor(Math.random() * 20 + 1),
+//         swimlaneId: Math.floor(Math.random() * 60 + 1)
+//       })
+//     )
+//   );
+// }
+
+// module.exports = seed;

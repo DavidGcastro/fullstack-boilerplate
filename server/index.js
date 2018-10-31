@@ -36,7 +36,7 @@ app.use(
   })
 );
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   console.log('******SESSION HERE***** ', req.session);
   if (req.session.userId) {
     console.log('USER WAS HERE BEFORE');
@@ -63,8 +63,7 @@ app.use((err, req, res, next) => {
 module.exports = app;
 
 db.sync({ force: true }) // if you update your db schemas, make sure you drop the tables first and then recreate them
- //call seed file here if necessary
-// .then(() => seed())
+  .then(() => seed())
   .then(() => {
     console.log('db synced');
     app.listen(PORT, () => console.log(`Listening on ${PORT}`));
